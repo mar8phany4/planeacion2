@@ -10,3 +10,8 @@ Original file is located at
 import streamlit as st
 
 st.write(" conversión viaje_persona a viaje_vehiculo")
+
+vp = st.number_input("Ingresa el valor de viajes persona", min_value=0.0)
+opv = st.number_input("Ingresa el valor de ocupacion promedio del vehiculo", min_value=0.01)
+vv = vp / opv
+st.write(f"el valor de viaje por vehiculo es = {vv:.4f}")
