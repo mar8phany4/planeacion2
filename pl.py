@@ -10,7 +10,7 @@ Original file is located at
 import streamlit as st
 st.markdown("""
 ### Modelo que desea usar:
-- [Regresión Lineal](#regresion-lineal)
+- [Conversión de viajes/día en viajes/hora](#Conversion_de_viajes/dia_en_viajes/hora)
 """)
 st.header("Módulo 1")
 st.subheader("Regresión Lineal y múltiple", divider="violet")
