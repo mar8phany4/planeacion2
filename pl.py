@@ -9,7 +9,7 @@ Original file is located at
 
 import streamlit as st
 st.header("Módulo 1")
-st.subheader("Regresión Lineal y múltiple", divider=True)
+st.subheader("Regresión Lineal y múltiple", divider="rainbow")
 st.subheader("Factor de crecimiento", divider=True)
 st.subheader("Clasificación cruzada", divider=True)
 st.subheader("Balanceo de viajes generados y atraídos", divider=True)
