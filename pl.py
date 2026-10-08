@@ -9,7 +9,7 @@ Original file is located at
 
 import streamlit as st
 st.markdown("""
-### Ir a:
+### Modelo que desea usar:
 - [Regresión Lineal](#regresion-lineal)
 """)
 st.header("Módulo 1")
