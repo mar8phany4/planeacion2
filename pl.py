@@ -9,7 +9,7 @@ Original file is located at
 
 import streamlit as st
 st.header("Módulo 1")
-st.subheader("Regresión Lineal", divider="violet")
+st.subheader("Regresión Lineal", divider=True)
 st.write(" conversión viaje_persona a viaje_vehiculo")
 
 vp = st.number_input("Ingresa el valor de viajes persona", min_value=0.0)
