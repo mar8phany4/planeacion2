@@ -8,6 +8,10 @@ Original file is located at
 """
 
 import streamlit as st
+st.markdown("""
+### Ir a:
+- [Regresión Lineal](#regresion-lineal)
+""")
 st.header("Módulo 1")
 st.subheader("Regresión Lineal y múltiple", divider="violet")
 st.subheader("Factor de crecimiento", divider="blue")
