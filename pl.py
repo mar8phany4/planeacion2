@@ -12,8 +12,9 @@ st.header("Módulo 1")
 st.subheader("Regresión Lineal y múltiple", divider=True)
 st.subheader("Factor de crecimiento", divider=True)
 st.subheader("Clasificación cruzada", divider=True)
-st.write(" conversión viaje_persona a viaje_vehiculo")
-
+st.subheader("Balanceo de viajes generados y atraídos", divider=True)
+st.subheader("Conversión de viajes/día en viajes/hora", divider=True)
+st.subheader("Conversión de viajes-persona a viajes-vehículo", divider=True)
 vp = st.number_input("Ingresa el valor de viajes persona", min_value=0.0)
 opv = st.number_input("Ingresa el valor de ocupacion promedio del vehiculo", min_value=0.01)
 vv = vp / opv
