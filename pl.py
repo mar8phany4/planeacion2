@@ -14,7 +14,10 @@ st.markdown("""
 """)
 st.header("Módulo 1")
 st.subheader("Regresión Lineal y múltiple", divider="violet")
+
 st.subheader("Factor de crecimiento", divider="blue")
+
+
 st.subheader("Clasificación cruzada", divider="green")
 st.subheader("Balanceo de viajes generados y atraídos", divider="yellow")
 
