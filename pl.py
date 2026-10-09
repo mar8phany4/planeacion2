@@ -27,3 +27,7 @@ vp = st.number_input("Ingresa el valor de viajes persona", min_value=0.0)
 opv = st.number_input("Ingresa el valor de ocupacion promedio del vehiculo", min_value=0.01)
 vv = vp / opv
 st.write(f"el valor de viaje-vehiculo es = {vv:.4f}")
+st.header("Módulo 2")
+st.subheader("Fratar con una restricción", divider="violet")
+st.subheader("Fratar con dos restricción", divider="blue")
+st.subheader("Gravedad", divider="green")
