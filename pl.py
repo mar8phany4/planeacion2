@@ -17,11 +17,13 @@ st.subheader("Regresión Lineal y múltiple", divider="violet")
 st.subheader("Factor de crecimiento", divider="blue")
 st.subheader("Clasificación cruzada", divider="green")
 st.subheader("Balanceo de viajes generados y atraídos", divider="yellow")
+
 st.subheader("Conversión de viajes/día en viajes/hora", divider="orange")
 vd = st.number_input("Ingresa la cantidad de viajes al día", min_value=0.0)
 ph = st.number_input("Ingresa el porcentaje de viajes en la hora que desea determinar", min_value=0.0)
 vh= vd*ph
 st.write(f"el valor de viaje/hora es  = {vh:.4f}")
+
 st.subheader("Conversión de viajes-persona a viajes-vehículo", divider="red")
 vp = st.number_input("Ingresa el valor de viajes persona", min_value=0.0)
 opv = st.number_input("Ingresa el valor de ocupacion promedio del vehiculo", min_value=0.01)
