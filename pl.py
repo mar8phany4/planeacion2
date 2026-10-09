@@ -36,3 +36,10 @@ st.subheader("Gravedad", divider="green")
 st.header("Módulo 3")
 st.subheader("Logit binario", divider="yellow")
 st.subheader("Logit múltiple", divider="orange")
+
+st.header("Módulo 4")
+st.subheader("Asignación todo o nada ", divider="red")
+st.subheader("Asignación probabilística (modelo STOCH) ", divider="violet")
+st.subheader("Asignación Frank-Wolfe ", divider="blue")
+
+st.header("Módulo 5")
