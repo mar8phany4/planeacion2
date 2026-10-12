@@ -82,24 +82,27 @@ if uploaded_file is not None:
     c = st.selectbox("Selecciona la columna de viajes generados:", columnas, key="generados")
 
     if st.button("Calcular"):
-        df = df[[a, b, c]]
+        df_resultado = df[[a, b, c]].copy()
 
-        total_v_atraidos = df[b].sum()
-        total_v_generados = df[c].sum()
+        total_v_atraidos = df_resultado[b].sum()
+        total_v_generados = df_resultado[c].sum()
 
         if total_v_atraidos < total_v_generados:
             f1 = total_v_generados / total_v_atraidos
-            df['Viajes atraidos balanceados'] = df[b] * f1
+            df_resultado['Viajes atraidos balanceados'] = df_resultado[b] * f1
 
         elif total_v_generados < total_v_atraidos:
             f2 = total_v_atraidos / total_v_generados
-            df['Viajes generados balanceados'] = df[c] * f2
+            df_resultado['Viajes generados balanceados'] = df_resultado[c] * f2
+
+        else:
+            st.info("Los viajes ya están balanceados, no se requiere ajuste.")
 
         st.write(f"Total viajes atraídos: {total_v_atraidos:.2f}")
         st.write(f"Total viajes generados: {total_v_generados:.2f}")
 
         st.subheader("Resultado")
-        st.write(df)
+        st.write(df_resultado)
 
   
 
