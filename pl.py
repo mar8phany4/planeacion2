@@ -35,9 +35,7 @@ for i in range(n):
     val = st.number_input(f"Viajes generados - Zona {i+1}:", min_value=0.0, step=0.1, key=f"vg_{i}")
     vg.append(val)
 
-if st.button("Calcular"):
-    total_viajes_atraidos = sum(va)
-    total_viajes_generados = sum(vg)
+
 
     if total_viajes_atraidos < total_viajes_generados:
         f = total_viajes_generados / total_viajes_atraidos if total_viajes_atraidos != 0 else 1
