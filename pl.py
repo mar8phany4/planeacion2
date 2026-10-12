@@ -81,7 +81,7 @@ if uploaded_file is not None:
     b = st.selectbox("Selecciona la columna de viajes atraídos:", columnas, key="atraidos")
     c = st.selectbox("Selecciona la columna de viajes generados:", columnas, key="generados")
 
-    if st.button("Calcular"):
+    if st.button("Obtener balanceo"):
         df_resultado = df[[a, b, c]].copy()
 
         total_v_atraidos = df_resultado[b].sum()
