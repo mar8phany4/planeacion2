@@ -58,13 +58,12 @@ if st.button("Calcular"):
         vg_n = vg.copy()
         balanceado = "Ya están balanceados (sin cambios)"
         valores_balanceados = va_n
-
+    st.write(f"**Suma de los viajes generados: {sum(vg):.2f}**")
+    st.write(f"**Suma de los viajes atraidos: {sum(va):.2f}**")
     st.subheader(f"Valores balanceados: {balanceado}")
     for i in range(n):
         st.write(f"Zona {i+1}: {valores_balanceados[i]:.2f}")
-    st.write(f"**Suma de los viajes generados: {sum(vg):.2f}**")
-    st.write(f"**Suma de los viajes atraidos: {sum(va):.2f}**")
-    st.write(f"**Total balanceado: {sum(valores_balanceados):.2f}**")
+    
 
 
   
