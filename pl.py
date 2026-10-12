@@ -65,7 +65,41 @@ if st.button("Calcular"):
     for i in range(n):
         st.write(f"Zona {i+1}: {valores_balanceados[i]:.2f}")
     
+st.write("balancear con un archivo csv")
 
+uploaded_file = st.file_uploader("Sube tu archivo CSV", type="csv")
+
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+
+    st.subheader("Vista previa del archivo")
+    st.write(df.head())
+
+    columnas = df.columns.tolist()
+
+    a = st.selectbox("Selecciona la columna que contiene las zonas:", columnas, key="zonas")
+    b = st.selectbox("Selecciona la columna de viajes atraídos:", columnas, key="atraidos")
+    c = st.selectbox("Selecciona la columna de viajes generados:", columnas, key="generados")
+
+    if st.button("Calcular"):
+        df = df[[a, b, c]]
+
+        total_v_atraidos = df[b].sum()
+        total_v_generados = df[c].sum()
+
+        if total_v_atraidos < total_v_generados:
+            f1 = total_v_generados / total_v_atraidos
+            df['Viajes atraidos balanceados'] = df[b] * f1
+
+        elif total_v_generados < total_v_atraidos:
+            f2 = total_v_atraidos / total_v_generados
+            df['Viajes generados balanceados'] = df[c] * f2
+
+        st.write(f"Total viajes atraídos: {total_v_atraidos:.2f}")
+        st.write(f"Total viajes generados: {total_v_generados:.2f}")
+
+        st.subheader("Resultado")
+        st.write(df)
 
   
 
