@@ -59,7 +59,7 @@ if st.button("Calcular"):
         balanceado = "Ya están balanceados (sin cambios)"
         valores_balanceados = va_n
 
-    st.subheader(f"Resultado: {balanceado}")
+    st.subheader(f"Valores balancedos: {balanceado}")
     for i in range(n):
         st.write(f"Zona {i+1}: {valores_balanceados[i]:.2f}")
 
