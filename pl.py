@@ -19,7 +19,40 @@ st.subheader("Factor de crecimiento", divider="blue")
 
 
 st.subheader("Clasificación cruzada", divider="green")
+
 st.subheader("Balanceo de viajes generados y atraídos", divider="yellow")
+n = st.number_input("Cantidad de zonas:", min_value=1, step=1, value=2)
+va =[]
+for i in range(n):
+  valor=st.number_input(f"Viajes generados - Zona {i+1}:", min_value=0.0, step=0.1, key=f"va_{i}")
+  va.append(valor)
+total_viajes_atraidos= sum(va)
+
+vg =[]
+for i in range(n):
+  val= st.number_input(f"Viajes generados - Zona {i+1}:", min_value=0.0, step=0.1, key=f"vg_{i}")
+  vg.append(val)
+total_viajes_generados = sum(vg)
+
+if st.button("Calcular"):
+    total_viajes_atraidos = sum(va)
+    total_viajes_generados = sum(vg)
+
+if total_viajes_atraidos < total_viajes_generados:
+  f = total_viajes_generados / total_viajes_atraidos
+  va_n = [x*f for x in va]
+  vg_n= vg.copy()
+elif total_viajes_generados < total_viajes_atraidos:
+  f = total_viajes_atraidos / total_viajes_generados
+  vg_n = [x*f for x in vg]
+  va_ = va.copy()
+else:
+  va_n =va.copy()
+  vg_n = vg.copy()
+for i in range(n):
+  st.write(f"Zona {i+1}: {valores_balanceados[i]:.2f}")
+
+st.write(f"**Total balanceado: {sum(valores_balanceados):.2f}**")
 
 st.subheader("Conversión de viajes/día en viajes/hora", divider="orange")
 vd = st.number_input("Ingresa la cantidad de viajes al día", min_value=0.0)
