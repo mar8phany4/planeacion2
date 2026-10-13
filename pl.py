@@ -18,7 +18,31 @@ st.header("Módulo 1")
 st.subheader("Regresión Lineal y múltiple", divider="violet")
 
 st.subheader("Factor de crecimiento", divider="blue")
+n = int(st.number_input("Cantidad de variables", min_value=1, value=1, step=1))
 
+with st.form("formulario"):
+    col1, col2, col3 = st.columns(3)
+    actual, previsto, peso = [], [], []
+
+    with col1:
+        for i in range(n):
+            actual.append(st.number_input(f"Variable {i+1} del año actual", key=f"act_{i}"))
+    with col2:
+        for i in range(n):
+            previsto.append(st.number_input(f"Variable {i+1} del año previsto", key=f"prev_{i}"))
+    with col3:
+        for i in range(n):
+            peso.append(st.number_input(f"Peso de la variable {i+1}", key=f"peso_{i}"))
+
+    enviado = st.form_submit_button("Calcular factor de crecimiento")
+
+if enviado:
+    if any(a == 0 for a in actual):
+        st.error("Los valores del año actual no pueden ser 0.")
+    else:
+        fac1 = [(b / a) ** c for a, b, c in zip(actual, previsto, peso)]
+        fac_de_c = math.prod(fac1)
+        st.write("Factor de crecimiento:", fac_de_c)
 
 st.subheader("Clasificación cruzada", divider="green")
 
