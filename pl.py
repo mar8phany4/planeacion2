@@ -23,7 +23,7 @@ st.title("Regresión lineal")
 
 st.info("Notas: En cada columna coloca solo los valores de las variables independientes y dependientes. Las filas con valores vacíos serán eliminadas.")
 
-uploaded2 = st.file_uploader("Sube tu archivo CSV", type="csv")
+uploaded2 = st.file_uploader("Sube tu archivo CSV", type="csv",key="uploader_regresion")
 
 if uploaded2 is not None:
     df2 = pd.read_csv(uploaded_file)
@@ -135,7 +135,7 @@ if st.button("Calcular"):
     
 st.write("balancear con un archivo csv")
 
-uploaded = st.file_uploader("Sube tu archivo CSV", type="csv")
+uploaded = st.file_uploader("Sube tu archivo CSV", type="csv"key="uploader_balanceo")
 
 if uploaded is not None:
     df = pd.read_csv(uploaded_file)
