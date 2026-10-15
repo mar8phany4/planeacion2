@@ -135,7 +135,7 @@ if st.button("Calcular"):
     
 st.write("balancear con un archivo csv")
 
-uploaded = st.file_uploader("Sube tu archivo CSV", type="csv"key="uploader_balanceo")
+uploaded = st.file_uploader("Sube tu archivo CSV", type="csv",key="uploader_balanceo")
 
 if uploaded is not None:
     df = pd.read_csv(uploaded_file)
