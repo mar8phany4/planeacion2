@@ -22,7 +22,7 @@ st.write("Regresión lineal")
 
 st.info("Notas: En cada columna coloca solo los valores de las variables independientes y dependientes. Las filas con valores vacíos serán eliminadas.")
 
-uploaded_file = st.file_uploader("Sube tu archivo CSV", type="csv")
+uploaded_file2 = st.file_uploader("Sube tu archivo CSV", type="csv")
 
 if uploaded_file is not None:
     df2 = pd.read_csv(uploaded_file)
