@@ -19,7 +19,7 @@ st.markdown("""
 st.header("Módulo 1")
 st.subheader("Regresión Lineal y múltiple", divider="violet")
 st.write("Regresión lineal")
-st.title("Regresión lineal")
+
 
 st.info("Notas: En cada columna coloca solo los valores de las variables independientes y dependientes. Las filas con valores vacíos serán eliminadas.")
 
