@@ -17,7 +17,7 @@ st.markdown("""
 - [Conversión de viajes/día en viajes/hora](#Conversion_de_viajes/dia_en_viajes/hora)
 """)
 st.header("Módulo 1")
-st.subheader("Regresión Lineal y múltiple", divider="violet")
+st.subheader("Regresión Lineal", divider="violet")
 st.write("Regresión lineal")
 
 
