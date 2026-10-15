@@ -20,44 +20,7 @@ st.header("Módulo 1")
 st.subheader("Regresión Lineal y múltiple", divider="violet")
 st.write("Regresión lineal")
 
-st.info("Notas: En cada columna coloca solo los valores de las variables independientes y dependientes. Las filas con valores vacíos serán eliminadas.")
 
-uploaded_file2 = st.file_uploader("Sube tu archivo CSV", type="csv")
-
-if uploaded_file2 is not None:
-    df2 = pd.read_csv(uploaded_file)
-    st.write("Datos originales")
-    st.write(df2)
-
-    x = st.selectbox("Columna de valores independientes (x)", df2.columns)
-    y = st.selectbox("Columna de valores dependientes (y)", df2.columns)
-
-    df22 = df2[[x, y]]
-    df2_nuevo = df22.dropna()
-    st.write("Datos sin filas vacías")
-    st.write(df2_nuevo)
-
-    X = df2_nuevo[[x]]
-    Y = df2_nuevo[[y]]
-
-    modelo = LinearRegression()
-    modelo.fit(X, Y)
-    r2 = modelo.score(X, Y)
-    m = float(modelo.coef_[0][0])
-    b = float(modelo.intercept_[0])
-
-    st.write(f"La recta con mejor ajuste es: y = {m:.4f}x + {b:.4f}")
-    st.write("El valor de R^2 es: ", r2)
-
-    y_pred = modelo.predict(X)
-    fig, ax = plt.subplots()
-    ax.scatter(X.iloc[:, 0], Y, color='black', label='Datos reales')
-    ax.plot(X.iloc[:, 0], y_pred, color='purple', label='recta de regresión')
-    ax.set_xlabel('x')
-    ax.set_ylabel('y')
-    ax.set_title('Recta de regresión lineal')
-    ax.legend()
-    st.pyplot(fig)
 st.subheader("Factor de crecimiento", divider="blue")
 n = int(st.number_input("Cantidad de variables", min_value=1, value=1, step=1))
 
