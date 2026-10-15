@@ -20,7 +20,7 @@ st.header("Módulo 1")
 st.subheader("Regresión Lineal y múltiple", divider="violet")
 st.title("Regresión lineal")
 
-st.info("Notas: en cada columna coloca solo los valores de las variables independientes y deoendientes. Las filas con valores vacíos serán eliminadas.")
+st.info("Notas: En cada columna coloca solo los valores de las variables independientes y deoendientes. Las filas con valores vacíos serán eliminadas.")
 
 uploaded_file = st.file_uploader("Sube tu archivo CSV", type="csv")
 
