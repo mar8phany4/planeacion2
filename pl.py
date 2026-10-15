@@ -26,7 +26,7 @@ st.info("Notas: En cada columna coloca solo los valores de las variables indepen
 uploaded2 = st.file_uploader("Sube tu archivo CSV", type="csv",key="uploader_regresion")
 
 if uploaded2 is not None:
-    df2 = pd.read_csv(uploaded_file)
+    df2 = pd.read_csv(uploaded2)
     st.write("Datos originales")
     st.write(df2)
 
