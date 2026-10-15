@@ -21,8 +21,7 @@ st.subheader("Regresión Lineal", divider="violet")
 st.write("Regresión lineal")
 
 
-st.info("Notas: En cada columna coloca solo los valores de las variables independientes y dependientes.
-Las filas con valores vacíos serán eliminadas.")
+st.info("Notas: En cada columna coloca solo los valores de las variables independientes y dependientes. Las filas con valores vacíos serán eliminadas.")
 
 uploaded2 = st.file_uploader("Sube tu archivo CSV", type="csv",key="uploader_regresion")
 
