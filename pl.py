@@ -147,8 +147,8 @@ if archivo is not None:
 
     # ==================== MODELO 2 ====================
     st.subheader("Modelo 2")
-    a_m2 = st.text_input("Nombre de la columna con los nombres de las variables (Modelo 2):", key="col_m2")
-    a2_m2 = st.text_input("Nombre que tendrá la columna de etiquetas en el resultado (Modelo 2):", key="col_etiqueta_m2")
+    a_m2 = st.text_input("Nombre de la columna con los nombres de las variables :", key="col_m2")
+    a2_m2 = st.text_input("Nombre que tendrá la columna de etiquetas en el resultado :", key="col_etiqueta_m2")
 
     if st.button("Usar Modelo 2"):
         if a_m2 and a_m2 in df2.columns:
@@ -157,9 +157,6 @@ if archivo is not None:
             sum_d_c = df32n.apply(pd.to_numeric, errors='coerce').sum(axis=0)
             sum_fin = sum_d_c.sum()
             df4n = df32n.apply(pd.to_numeric, errors='coerce') / sum_fin
-
-            st.write("DataFrame de proporciones:")
-            st.dataframe(df4n)
 
             df42n = df4n.copy()
             df42n.insert(0, a2_m2, df2[a_m2].reset_index(drop=True).values)
