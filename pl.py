@@ -102,8 +102,8 @@ if archivo is not None:
 
     # ==================== MODELO 1 ====================
     st.subheader("Modelo 1")
-    a_m1 = st.text_input("Nombre de la columna con los nombres de las variables (Modelo 1):", key="col_m1")
-    b_m1 = st.number_input("Número de la fila a eliminar (Modelo 1):", min_value=0, step=1, key="fila_m1")
+    a_m1 = st.text_input("Nombre de la columna con los nombres de las variables :", key="col_m1")
+    b_m1 = st.number_input("Número de la fila con los nombres de las variables :", min_value=0, step=1, key="fila_m1")
 
     if st.button("Usar Modelo 1"):
         if a_m1 and a_m1 in df2.columns:
@@ -111,15 +111,11 @@ if archivo is not None:
             df32 = df2.drop(columns=[a_m1])
             df322 = df32.drop(df32.index[int(b_m1)])
 
-            st.write("DataFrame sin columna y fila seleccionadas:")
-            st.dataframe(df322)
+            
 
             sum_d_c = df322.apply(pd.to_numeric, errors='coerce').sum(axis=0)
             sum_fin = sum_d_c.sum()
             df4 = df322.apply(pd.to_numeric, errors='coerce') / sum_fin
-
-            st.write("DataFrame de proporciones:")
-            st.dataframe(df4)
 
             df42 = df4.copy()
             df42.insert(0, '', df2[a_m1].iloc[1:].reset_index(drop=True).values)
