@@ -88,6 +88,91 @@ if enviado:
         st.write("Factor de crecimiento:", fac_de_c)
 
 st.subheader("Clasificación cruzada", divider="green")
+archivo = st.file_uploader("Sube tu archivo CSV", type="csv", key="uploader_clasificacion")
+
+if archivo is not None:
+    df2 = pd.read_csv(archivo)
+    st.write("Vista previa del archivo:")
+    st.dataframe(df2)
+
+    # --- Guardamos el dataframe en session_state ---
+    st.session_state['df2'] = df2
+
+    st.divider()
+
+    # ==================== MODELO 1 ====================
+    st.subheader("Modelo 1")
+    a_m1 = st.text_input("Nombre de la columna con los nombres de las variables (Modelo 1):", key="col_m1")
+    b_m1 = st.number_input("Número de la fila a eliminar (Modelo 1):", min_value=0, step=1, key="fila_m1")
+
+    if st.button("Usar Modelo 1"):
+        if a_m1 and a_m1 in df2.columns:
+            # Procesamiento Modelo 1
+            df32 = df2.drop(columns=[a_m1])
+            df322 = df32.drop(df32.index[int(b_m1)])
+
+            st.write("DataFrame sin columna y fila seleccionadas:")
+            st.dataframe(df322)
+
+            sum_d_c = df322.apply(pd.to_numeric, errors='coerce').sum(axis=0)
+            sum_fin = sum_d_c.sum()
+            df4 = df322.apply(pd.to_numeric, errors='coerce') / sum_fin
+
+            st.write("DataFrame de proporciones:")
+            st.dataframe(df4)
+
+            df42 = df4.copy()
+            df42.insert(0, '', df2[a_m1].iloc[1:].reset_index(drop=True).values)
+
+            st.session_state['df42_m1'] = df42
+            st.write("DataFrame con columna de nombres:")
+            st.dataframe(df42)
+        else:
+            st.error("Por favor ingresa un nombre de columna válido.")
+
+    # Renombrar columnas Modelo 1
+    if 'df42_m1' in st.session_state:
+        st.write("**Renombrar columnas (Modelo 1):**")
+        df42 = st.session_state['df42_m1']
+        nuevos_nombres = []
+        for i in range(len(df42.columns)):
+            nombre = st.text_input(f"Nombre para la columna {i + 1}:", key=f"col_name_m1_{i}")
+            nuevos_nombres.append(nombre)
+
+        if st.button("Aplicar nuevos nombres (Modelo 1)"):
+            if all(nuevos_nombres):
+                df42.columns = nuevos_nombres
+                st.write("DataFrame con nuevos nombres:")
+                st.dataframe(df42)
+            else:
+                st.warning("Por favor completa todos los nombres antes de aplicar.")
+
+    st.divider()
+
+    # ==================== MODELO 2 ====================
+    st.subheader("Modelo 2")
+    a_m2 = st.text_input("Nombre de la columna con los nombres de las variables (Modelo 2):", key="col_m2")
+    a2_m2 = st.text_input("Nombre que tendrá la columna de etiquetas en el resultado (Modelo 2):", key="col_etiqueta_m2")
+
+    if st.button("Usar Modelo 2"):
+        if a_m2 and a_m2 in df2.columns:
+            # Procesamiento Modelo 2
+            df32n = df2.drop(columns=[a_m2])
+            sum_d_c = df32n.apply(pd.to_numeric, errors='coerce').sum(axis=0)
+            sum_fin = sum_d_c.sum()
+            df4n = df32n.apply(pd.to_numeric, errors='coerce') / sum_fin
+
+            st.write("DataFrame de proporciones:")
+            st.dataframe(df4n)
+
+            df42n = df4n.copy()
+            df42n.insert(0, a2_m2, df2[a_m2].reset_index(drop=True).values)
+
+            st.write("DataFrame con columna de nombres:")
+            st.dataframe(df42n)
+        else:
+            st.error("Por favor ingresa un nombre de columna válido.")
+
 
 st.subheader("Balanceo de viajes generados y atraídos", divider="yellow")
 n = st.number_input("Cantidad de zonas:", min_value=1, step=1, value=2)
