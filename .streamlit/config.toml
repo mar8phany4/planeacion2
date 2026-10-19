@@ -1,0 +1,7 @@
+[global]
+minCachedMessageSize = 1e12
+
+[server]
+maxUploadSize = 200
+maxMessageSize = 200
+websocketPingInterval = 30
