@@ -251,8 +251,17 @@ if uploaded is not None:
         st.write(df_resultado)
 
   
-
+#================CONVERSION DE VIAJES/DIA A VIAJES/HORA============================
 st.subheader("Conversión de viajes/día en viajes/hora", divider="orange")
+st.markdown("""
+En esta conversión se calculará la cantidad de viajes en una determinada hora (viajes/hora) 
+a partir de la cantidad de viajes ocurridos en un dia (viajes/dia) y el porcentaje de 
+viajes que ocurren en esa hora (Ph).
+
+**Fórmula para calcular viajes/hora:**
+""")
+
+st.latex(r"viajes/hora = (viajes/dia)(Ph)")
 vd = st.number_input("Ingresa la cantidad de viajes/día", min_value=0.0)
 ph = st.number_input("Ingresa el porcentaje de viajes en la hora que desea determinar", min_value=0.0)
 vh= vd*ph
