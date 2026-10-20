@@ -260,7 +260,7 @@ st.write(f"el valor de viaje/hora es  = {vh:.4f}")
 
 st.subheader("Conversión de viajes-persona a viajes-vehículo", divider="red")
 st.markdown("""
-El propósito de esta conversión es calcular la cantidad de viajes que realiza 
+El propósito de esta conversión es calcular la cantidad de viajes realizados 
 por los vehículos (viaje-vehículo vv).
 
 Los datos necesarios para calcular esto son:
