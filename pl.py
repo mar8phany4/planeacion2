@@ -17,6 +17,8 @@ st.markdown("""
 - [Conversión de viajes/día en viajes/hora](#Conversion_de_viajes/dia_en_viajes/hora)
 """)
 st.header("Módulo 1")
+
+#============================REGRESION LINEAL========================================================
 st.subheader("Regresión Lineal", divider="violet")
 st.write("Regresión lineal")
 
@@ -59,7 +61,8 @@ if uploaded2 is not None:
     ax.set_title('Recta de regresión lineal')
     ax.legend()
     st.pyplot(fig)
-
+    
+#============================FACTOR DE CRECIMIENTO======================================================================
 st.subheader("Factor de crecimiento", divider="blue")
 n = int(st.number_input("Cantidad de variables", min_value=1, value=1, step=1))
 
@@ -87,6 +90,7 @@ if enviado:
         fac_de_c = math.prod(fac1)
         st.write("Factor de crecimiento:", fac_de_c)
 
+#============================CLASIFICACION CRUZADA======================================================================
 st.subheader("Clasificación cruzada", divider="green")
 archivo = st.file_uploader("Sube tu archivo CSV", type="csv", key="uploader_clasificacion")
 
@@ -166,7 +170,7 @@ if archivo is not None:
         else:
             st.error("Por favor ingresa un nombre de columna válido.")
 
-
+#============================BALANCEO DE VIAJES GENERADOS Y ATRAIDOS======================================================================
 st.subheader("Balanceo de viajes generados y atraídos", divider="yellow")
 n = st.number_input("Cantidad de zonas:", min_value=1, step=1, value=2)
 
@@ -267,6 +271,7 @@ ph = st.number_input("Ingresa el porcentaje de viajes en la hora que desea deter
 vh= vd*ph
 st.write(f"el valor de viaje/hora es  = {vh:.4f}")
 
+#==============CONVERSION DE VIAJES-PERSONA A VIAJES-VEHICULO========================================================
 st.subheader("Conversión de viajes-persona a viajes-vehículo", divider="red")
 st.markdown("""
 El propósito de esta conversión es calcular la cantidad de viajes realizados 
