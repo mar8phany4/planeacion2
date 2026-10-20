@@ -259,7 +259,7 @@ vh= vd*ph
 st.write(f"el valor de viaje/hora es  = {vh:.4f}")
 
 st.subheader("Conversión de viajes-persona a viajes-vehículo", divider="red")
-vp = st.number_input("Ingresa el valor de viajes persona", min_value=0.0)
+vp = st.number_input("Ingresa el valor de viajes-persona", min_value=0.0)
 opv = st.number_input("Ingresa el valor de ocupacion promedio del vehiculo", min_value=0.01)
 vv = vp / opv
 st.write(f"el valor de viaje-vehiculo es = {vv:.4f}")
