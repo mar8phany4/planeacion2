@@ -259,6 +259,19 @@ vh= vd*ph
 st.write(f"el valor de viaje/hora es  = {vh:.4f}")
 
 st.subheader("Conversión de viajes-persona a viajes-vehículo", divider="red")
+st.markdown("""
+El propósito de esta conversión es calcular la cantidad de viajes que realiza 
+por los vehículos (viaje-vehículo vv).
+
+Los datos necesarios para calcular esto son:
+- **viajes-persona (vp):** indica la cantidad de viajes realizados.
+- **ocupación promedio del vehículo (op):** indica la cantidad promedio de 
+personas que viajan en cada vehículo.
+
+**Fórmula para calcular vv:**
+""")
+st.latex(r"vv = \frac{vp}{op}")
+
 vp = st.number_input("Ingresa el valor de viajes-persona", min_value=0.0)
 opv = st.number_input("Ingresa el valor de ocupacion promedio del vehiculo", min_value=0.01)
 vv = vp / opv
