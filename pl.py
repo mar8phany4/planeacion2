@@ -253,7 +253,7 @@ if uploaded is not None:
   
 
 st.subheader("Conversión de viajes/día en viajes/hora", divider="orange")
-vd = st.number_input("Ingresa la cantidad de viajes al día", min_value=0.0)
+vd = st.number_input("Ingresa la cantidad de viajes/día", min_value=0.0)
 ph = st.number_input("Ingresa el porcentaje de viajes en la hora que desea determinar", min_value=0.0)
 vh= vd*ph
 st.write(f"el valor de viaje/hora es  = {vh:.4f}")
