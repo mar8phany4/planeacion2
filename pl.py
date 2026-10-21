@@ -173,9 +173,9 @@ if archivo is not None:
 #============================BALANCEO DE VIAJES GENERADOS Y ATRAIDOS======================================================================
 st.subheader("Balanceo de viajes generados y atraídos", divider="yellow")
 st.markdown("""
-En este modelo el usuario puede escoger la cantidad de zonas. Hay dos formas de ingresar los datos:
-manualmente, o mediante un archivo CSV con una columna con el nombre de la zona,
-una con los viajes generados y una con los viajes atraídos. Los valores de cada zona deben estar en la misma fila.
+En este modelo el usuario puede escoger la cantidad de zonas. Hay dos formas de ingresar los datos
+manualmente, o mediante un archivo CSV el cual debe estar organizado de las siguiente forma una columna tiene que contener el nombre de las zonas , otra de los viajes  generados por la zona y una de los viajes atraídos por la zona, 
+si se tiene el nombre de un zona el valor de los viajes atraídos y generados por la zona debe de estar en la misma fila..
 """)
 
 st.markdown("**Propósito del balanceo:** que la suma de viajes atraídos sea igual a la suma de viajes generados.")
@@ -185,7 +185,7 @@ st.latex(r'''
 ''')
 
 st.markdown("""
-donde Va_n es la cantidad de viajes atraídos por la zona n y Vg_n es la cantidad de viajes generados por la zona n.
+donde Va_n =  cantidad de viajes atraídos por la zona n y Vg_n = cantidad de viajes generados por la zona n.
 """)
 
 st.markdown("**Procedimiento:** primero se calculan V_A y V_G con los valores originales.")
