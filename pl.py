@@ -172,6 +172,42 @@ if archivo is not None:
 
 #============================BALANCEO DE VIAJES GENERADOS Y ATRAIDOS======================================================================
 st.subheader("Balanceo de viajes generados y atraídos", divider="yellow")
+st.markdown("""
+En este modelo el usuario puede escoger la cantidad de zonas. Hay dos formas de ingresar los datos:
+manualmente, o mediante un archivo CSV con una columna con el nombre de la zona,
+una con los viajes generados y una con los viajes atraídos. Los valores de cada zona deben estar en la misma fila.
+""")
+
+st.markdown("**Propósito del balanceo:** que la suma de viajes atraídos sea igual a la suma de viajes generados.")
+
+st.latex(r'''
+    V_A = \sum_{n} V_{a_n}, \qquad V_G = \sum_{n} V_{g_n}, \qquad V_A = V_G
+''')
+
+st.markdown("""
+donde Va_n es la cantidad de viajes atraídos por la zona n y Vg_n es la cantidad de viajes generados por la zona n.
+""")
+
+st.markdown("**Procedimiento:** primero se calculan V_A y V_G con los valores originales.")
+
+st.markdown("**Caso 1:** si V_A = V_G, las zonas ya están balanceadas.")
+
+st.markdown("**Caso 2:** si V_A < V_G:")
+st.latex(r'''
+    d = \frac{V_G}{V_A}, \qquad V_{a_n}^{nuevo} = V_{a_n} \cdot d
+''')
+
+st.markdown("**Caso 3:** si V_G < V_A:")
+st.latex(r'''
+    d = \frac{V_A}{V_G}, \qquad V_{g_n}^{nuevo} = V_{g_n} \cdot d
+''')
+
+st.markdown("Con estos nuevos valores, ambas sumas resultan iguales.")
+st.latex(r'''
+    \sum_{n} V_{a_n}^{nuevo} = \sum_{n} V_{g_n}
+    \quad \text{o} \quad
+    \sum_{n} V_{a_n} = \sum_{n} V_{g_n}^{nuevo}
+''')
 n = st.number_input("Cantidad de zonas:", min_value=1, step=1, value=2)
 
 st.subheader("Viajes Atraídos por Zona")
