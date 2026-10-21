@@ -64,6 +64,34 @@ if uploaded2 is not None:
     
 #============================FACTOR DE CRECIMIENTO======================================================================
 st.subheader("Factor de crecimiento", divider="blue")
+st.markdown("""
+El factor de crecimiento se utiliza para estimar la cantidad futura de viajes.
+Se compone de varias variables que influyen en la generación de viajes, como el tamaño de la población.
+En este modelo el usuario puede escoger la cantidad de variables que se considerarán al calcularlo.
+""")
+
+st.markdown("**Fórmula para calcular el factor de crecimiento:**")
+
+st.latex(r'''
+    FC = \left(\frac{v_{1f}}{v_{1a}}\right)^{p_1}
+         \left(\frac{v_{2f}}{v_{2a}}\right)^{p_2}
+         \cdots
+         \left(\frac{v_{mf}}{v_{ma}}\right)^{p_m}
+''')
+
+st.markdown("O, de forma compacta:")
+
+st.latex(r'''
+    FC = \prod_{i=1}^{m} \left(\frac{v_{if}}{v_{ia}}\right)^{p_i}
+''')
+
+st.markdown("""
+donde:
+- **v_if**: valor de la variable i en el año previsto.
+- **v_ia**: valor de la variable i en el año actual.
+- **p_i**: peso de la variable i.
+- **m**: cantidad de variables elegidas por el usuario.
+""")
 n = int(st.number_input("Cantidad de variables", min_value=1, value=1, step=1))
 
 with st.form("formulario"):
