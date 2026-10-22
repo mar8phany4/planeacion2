@@ -120,6 +120,10 @@ if enviado:
 
 #============================CLASIFICACION CRUZADA======================================================================
 st.subheader("Clasificación cruzada", divider="green")
+import streamlit as st
+
+st.text("En este se debe introducir la tabla de clasificación cruzada que se tenga, lo que hará este modelo es sumar todos los datos 
+en la tabla, la nueva tabla que se obtendrá en cada elemento de la tabla el valor original entre el total.")
 archivo = st.file_uploader("Sube tu archivo CSV", type="csv", key="uploader_clasificacion")
 
 if archivo is not None:
