@@ -21,6 +21,9 @@ st.header("Módulo 1")
 #============================REGRESION LINEAL========================================================
 st.subheader("Regresión Lineal", divider="violet")
 st.write("Regresión lineal")
+st.markdown("""
+Este modelo encontrara la mejor recta que mejor se ajuste a los datos proporcionados y le mostrará una gráfica con la recta y sus datos.
+""")
 
 
 st.info("Notas: En cada columna coloca solo los valores de las variables independientes y dependientes. Las filas con valores vacíos serán eliminadas.")
