@@ -390,6 +390,16 @@ st.markdown("""
 st.latex(r'''
     f(c_{ij}) = e^{\beta \, c_{ij}}
 ''')
+Gi = st.number_input("Cantidad de viajes generados por la zona i", value=0.0)
+Aj = st.number_input("Viajes atraídos por la zona j", value=0.0)
+cij = st.number_input("Costo de viajar de la zona i a la j", value=0.0)
+k = st.number_input("Factor de ajuste", value=1.0)
+beta = st.number_input("Valor de la beta para la función de impedancia", value=0.0, format="%0.4f")
+
+f_cij = np.exp(beta * cij)
+Tij = (k * Gi * Aj) / f_cij
+
+st.write("La cantidad de viajes de la zona i a j:", Tij)
 st.header("Módulo 3")
 st.subheader("Logit binario", divider="yellow")
 st.subheader("Logit múltiple", divider="orange")
