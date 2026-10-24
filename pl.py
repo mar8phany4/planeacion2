@@ -367,8 +367,29 @@ st.write(f"el valor de viaje-vehiculo es = {vv:.4f}")
 st.header("Módulo 2")
 st.subheader("Fratar con una restricción", divider="violet")
 st.subheader("Fratar con dos restricción", divider="blue")
+#==============GRAVEDAD================================================================================================================
 st.subheader("Gravedad", divider="green")
+st.markdown("**Fórmula:**")
 
+st.latex(r'''
+    T_{ij} = \frac{k \, G_i \, A_j}{f(c_{ij})}
+''')
+
+st.markdown("donde:")
+
+st.markdown("""
+- **Tᵢⱼ** = la cantidad de viajes de la zona i a j
+- **Gᵢ** = cantidad de viajes generados por la zona i
+- **Aⱼ** = viajes atraídos por la zona j
+- **cᵢⱼ** = costo de viajar de la zona i a la j
+- **k** = factor de ajuste
+- **β** = valor de la beta para la función de impedancia
+- **f(cᵢⱼ)** = función de impedancia, definida como:
+""")
+
+st.latex(r'''
+    f(c_{ij}) = e^{\beta \, c_{ij}}
+''')
 st.header("Módulo 3")
 st.subheader("Logit binario", divider="yellow")
 st.subheader("Logit múltiple", divider="orange")
