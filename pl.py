@@ -378,7 +378,7 @@ st.latex(r'''
 st.markdown("donde:")
 
 st.markdown("""
-- **Tᵢⱼ** = la cantidad de viajes de la zona i a j
+- **Tᵢⱼ** =  cantidad de viajes de la zona i a j
 - **Gᵢ** = cantidad de viajes generados por la zona i
 - **Aⱼ** = viajes atraídos por la zona j
 - **cᵢⱼ** = costo de viajar de la zona i a la j
