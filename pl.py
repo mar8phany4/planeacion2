@@ -411,3 +411,9 @@ st.subheader("Asignación probabilística (modelo STOCH) ", divider="violet")
 st.subheader("Asignación Frank-Wolfe ", divider="blue")
 
 st.header("Módulo 5")
+
+st.subheader("Obtención de rutas mínimas", divider="green")
+st.subheader("Matriz de costos", divider="yellow")
+st.subheader("Matirz a tabla", divider="orange")
+st.subheader("Tabla a matriz ", divider="red")
+st.subheader("Unir tablas", divider="violet")
