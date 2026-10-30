@@ -293,7 +293,7 @@ st.write("balancear con un archivo csv")
 uploaded = st.file_uploader("Sube tu archivo CSV", type="csv",key="uploader_balanceo")
 
 if uploaded is not None:
-    df = pd.read_csv(uploaded_file)
+    df = pd.read_csv(uploaded)
 
     st.subheader("Vista previa del archivo")
     st.write(df.head())
