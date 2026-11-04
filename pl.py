@@ -162,7 +162,7 @@ if archivo is not None:
             df42.insert(0, '', df2[a_m1].iloc[1:].reset_index(drop=True).values)
 
             st.session_state['df42_m1'] = df42
-            st.write("DataFrame con columna de nombres:")
+            st.write("Tabla nueva:")
             st.dataframe(df42)
         else:
             st.error("Por favor ingresa un nombre de columna válido.")
@@ -179,7 +179,7 @@ if archivo is not None:
         if st.button("Aplicar nuevos nombres (Modelo 1)"):
             if all(nuevos_nombres):
                 df42.columns = nuevos_nombres
-                st.write("DataFrame con nuevos nombres:")
+                st.write("Tabla nueva:")
                 st.dataframe(df42)
             else:
                 st.warning("Por favor completa todos los nombres antes de aplicar.")
@@ -202,7 +202,7 @@ if archivo is not None:
             df42n = df4n.copy()
             df42n.insert(0, a2_m2, df2[a_m2].reset_index(drop=True).values)
 
-            st.write("DataFrame con columna de nombres:")
+            st.write("Tabla nueva:")
             st.dataframe(df42n)
         else:
             st.error("Por favor ingresa un nombre de columna válido.")
