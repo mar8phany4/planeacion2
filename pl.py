@@ -416,13 +416,21 @@ st.subheader("Matriz a tabla", divider="orange")
 st.subheader("Tabla a matriz ", divider="red")
 #==============UNIR_TABLAS======================================================================
 st.subheader("Unir tablas", divider="violet")
-csv_unir_t1 = st.file_uploader("Sube tu archivo CSV para la tabla 1", type="csv",key="uploader_unir_tablas1")
-csv_unir_t2 = st.file_uploader("Sube tu archivo CSV para la tabla 2", type="csv",key="uploader_unir_tablas2")
-df_unirt1 = pd.read_csv(csv_unir_t1 )
-df_unirt2 = pd.read_csv(csv_unir_t2 )
-st.write("Vista previa del archivo 1:")
-st.dataframe(df_unirt1)
-st.write("Vista previa del archivo 2:")
-st.dataframe(df_unirt2)
-tabla_unida = pd.concat([df_unirt1, df_unirt2], axis=1)
-st.dataframe(tabla_unida)
+csv_unir_t1 = st.file_uploader("Sube tu archivo CSV para la tabla 1", type="csv", key="uploader_unir_tablas1")
+csv_unir_t2 = st.file_uploader("Sube tu archivo CSV para la tabla 2", type="csv", key="uploader_unir_tablas2")
+
+if csv_unir_t1 is not None and csv_unir_t2 is not None:
+    df_unirt1 = pd.read_csv(csv_unir_t1)
+    df_unirt2 = pd.read_csv(csv_unir_t2)
+
+    st.write("Vista previa del archivo 1:")
+    st.dataframe(df_unirt1)
+
+    st.write("Vista previa del archivo 2:")
+    st.dataframe(df_unirt2)
+
+    tabla_unida = pd.concat([df_unirt1, df_unirt2], axis=1)
+    st.write("Tabla unida:")
+    st.dataframe(tabla_unida)
+else:
+    st.info("Por favor, sube ambos archivos CSV para continuar.")
