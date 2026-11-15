@@ -433,4 +433,4 @@ if csv_unir_t1 is not None and csv_unir_t2 is not None:
     st.write("Tabla unida:")
     st.dataframe(tabla_unida)
 else:
-    st.info("Por favor, sube ambos archivos CSV para continuar.")
+    st.info("Sube ambos archivos CSV para continuar.")
