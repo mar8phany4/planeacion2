@@ -365,7 +365,29 @@ vv = vp / opv
 st.write(f"el valor de viaje-vehiculo es = {vv:.4f}")
 
 st.header("Módulo 2")
+#==============FRATAR_CON_UNA_RESTRICCION====================================================================================
 st.subheader("Fratar con una restricción", divider="violet")
+st.markdown("""
+La tabla Origen destino nos dice la cantidad de viajes de la zona A a la zona B.
+El propósito de este modelo es obtener la tabla Origen/Destino del año de pronóstico a partir de la tabla Origen/Destino 
+del año actual y los factores de crecimiento.La celda Tij (con i la fila y j la columna) de la nueva tabla se calcula de la siguiente 
+forma:
+""")
+st.latex(r'''
+    T_{ij} = \frac{t_i \cdot F_i \cdot t_{ij} \cdot G_j}{\sum_{x} (t_{ix} \cdot F_x)}
+''')
+st.markdown("""
+Donde:
+- **T_ij**: Viajes de la zona i a la zona j en el año de pronóstico
+- **t_ij**: Viajes de la zona i a la zona j en el año actual
+- **t_i**: Total de viajes originados en la zona i en el año actual
+- **F_i**: Factor de crecimiento de la zona de origen i
+- **F_j**: Factor de crecimiento de la zona de destino j
+- **F_x**: Factor de crecimiento de la zona x
+- **t_ix**: Viajes actuales desde la zona i hacia la zona x
+- **Σx(t_ix · F_x)**: Suma sobre todas las zonas x de los viajes actuales desde i, ponderados por su factor de crecimiento
+""")
+#=============FRATAR_CON_DOS_RESTRICCIONES==============================================================================
 st.subheader("Fratar con dos restricción", divider="blue")
 #==============GRAVEDAD================================================================================================================
 st.subheader("Gravedad", divider="green")
