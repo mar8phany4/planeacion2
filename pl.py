@@ -387,6 +387,7 @@ Donde:
 - **t_ix**: Viajes actuales desde la zona i hacia la zona x
 - **Σx(t_ix · F_x)**: Suma sobre todas las zonas x de los viajes actuales desde i, ponderados por su factor de crecimiento
 """)
+st.markdown("Además se cumplirá que Fᵢ · tᵢ = Σ tᵢₓ")
 #=============FRATAR_CON_DOS_RESTRICCIONES==============================================================================
 st.subheader("Fratar con dos restricción", divider="blue")
 #==============GRAVEDAD================================================================================================================
