@@ -436,8 +436,34 @@ st.subheader("Asignación Frank-Wolfe ", divider="blue")
 st.header("Módulo 5")
 st.subheader("Obtención de rutas mínimas", divider="green")
 st.subheader("Matriz de costos", divider="yellow")
-st.subheader("Matriz a tabla", divider="orange")
 
+#==============MATRIZ_A_TABLA#==================================================================================================
+st.subheader("Matriz a tabla", divider="orange")
+n = int(st.number_input("Cantidad de filas", min_value=1, value=2, step=1))
+m = int(st.number_input("Cantidad de columnas", min_value=1, value=2, step=1))
+
+st.subheader("Nombres de columnas")
+nombres_columnas = [
+    st.text_input(f"Nombre de la columna {j+1}", value=f"col {j+1}", key=f"col_{j}")
+    for j in range(m)
+]
+
+st.subheader("Nombres de filas")
+nombres_filas = [
+    st.text_input(f"Nombre de la fila {i+1}", value=f"fila {i+1}", key=f"fila_{i}")
+    for i in range(n)
+]
+
+st.subheader("Valores de la matriz")
+df_inicial = pd.DataFrame(
+    np.zeros((n, m)), index=nombres_filas, columns=nombres_columnas
+)
+df_matriz_1 = st.data_editor(df_inicial, key=f"editor_{n}_{m}")
+
+st.subheader("Matriz resultante")
+matriz_1np = df_matriz_1.to_numpy()
+st.write(matriz_1np)
+st.dataframe(df_matriz_1)
 #==============TABLA_A_MATRIZ#==================================================================================================
 st.subheader("Tabla a matriz ", divider="red")
 csv_tabla_a_m = st.file_uploader("Sube tu archivo CSV ", type="csv",key="uploader_tabla_a_matriz")
