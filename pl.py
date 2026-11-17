@@ -435,7 +435,16 @@ st.header("Módulo 5")
 st.subheader("Obtención de rutas mínimas", divider="green")
 st.subheader("Matriz de costos", divider="yellow")
 st.subheader("Matriz a tabla", divider="orange")
+
+#==============TABLA_A_MATRIZ#==================================================================================================
 st.subheader("Tabla a matriz ", divider="red")
+csv_tabla_a_m = st.file_uploader("Sube tu archivo CSV ", type="csv",key="uploader_tabla_a_matriz")
+if csv_tabla_a_m is not None:
+    df_tab_a_mat = pd.read_csv(csv_tabla_a_m)
+    st.write("Vista previa del archivo:")
+    st.dataframe(df_tab_a_mat)
+    matriz = df_tab_a_mat.to_numpy()
+    st.table(matriz)
 #==============UNIR_TABLAS======================================================================
 st.subheader("Unir tablas", divider="violet")
 csv_unir_t1 = st.file_uploader("Sube tu archivo CSV para la tabla 1", type="csv", key="uploader_unir_tablas1")
