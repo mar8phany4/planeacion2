@@ -368,7 +368,7 @@ st.header("Módulo 2")
 #==============FRATAR_CON_UNA_RESTRICCION====================================================================================
 st.subheader("Fratar con una restricción", divider="violet")
 st.markdown("""
-La tabla Origen destino nos dice la cantidad de viajes de la zona A a la zona B.
+La tabla Origen/Destino nos dice la cantidad de viajes de la zona A a la zona B.
 El propósito de este modelo es obtener la tabla Origen/Destino del año de pronóstico a partir de la tabla Origen/Destino 
 del año actual y los factores de crecimiento.La celda Tij (con i la fila y j la columna) de la nueva tabla se calcula de la siguiente 
 forma:
