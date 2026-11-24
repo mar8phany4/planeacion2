@@ -389,6 +389,86 @@ Donde:
 """)
 st.markdown("Además se cumplirá que Fᵢ · t̃ᵢ = Σ t̃ᵢₓ , donde t̃ᵢₓ es la celda con fila i columna x de la tabla del año de pronóstico")
 
+uploaded_file = st.file_uploader(
+    "Sube tu archivo CSV con la tabla Fratar",
+    type="csv",
+    key="csv_frat1"
+)
+
+if uploaded_file is not None:
+    df_frat = pd.read_csv(uploaded_file)
+    st.subheader("Vista previa de la tabla cargada")
+    st.dataframe(df_frat)
+
+    # --- Selección de columna de orígenes ---
+    a_frat = st.selectbox(
+        "Selecciona la columna que contiene el nombre de los orígenes:",
+        options=df_frat.columns.tolist(),
+        key="col_origenes_frat"
+    )
+
+    # --- ¿Los nombres de las filas son correctos? ---
+    respuesta = st.radio(
+        "¿Los nombres de las filas en la tabla son los que desea?",
+        options=["si", "no"],
+        key="respuesta_frat"
+    )
+
+    if respuesta == "si":
+        df3_frat = df_frat.drop(columns=[a_frat])
+
+    elif respuesta == "no":
+        b_frat = st.number_input(
+            "Indica el número de la fila que contiene el nombre de los destinos (índice 0-based):",
+            min_value=0,
+            max_value=len(df_frat) - 1,
+            step=1,
+            key="fila_destinos_frat"
+        )
+        df2_frat = df_frat.drop(columns=[a_frat])
+        df3_frat = df2_frat.drop(df2_frat.index[int(b_frat)])
+
+    st.subheader("Tabla procesada")
+    st.dataframe(df3_frat)
+
+    # --- Cálculo de la matriz y sumas de fila ---
+    tij_frat = df3_frat.apply(pd.to_numeric, errors='coerce').to_numpy()
+
+    df3_frat = df3_frat.copy()
+    df3_frat['Suma_Fila'] = df3_frat.apply(pd.to_numeric, errors='coerce').sum(axis=1)
+    ti_frat = df3_frat['Suma_Fila'].tolist()
+
+    zonas_i = df_frat.loc[df3_frat.index, a_frat].tolist()
+
+    st.subheader("Factores de crecimiento por zona")
+    fj_frat = []
+    for zona in zonas_i:
+        valor = st.number_input(
+            f"Factor de crecimiento para '{zona}':",
+            min_value=0.0,
+            value=1.0,
+            step=0.1,
+            key=f"factor_{zona}_frat"
+        )
+        fj_frat.append(valor)
+
+    if st.button("Calcular Fratar", key="btn_calcular_frat"):
+        Ti_frat = [t * f for t, f in zip(ti_frat, fj_frat)]
+
+        ti_arr = np.array(ti_frat)
+        Fi_arr = np.array(fj_frat)
+        Ti_arr = np.array(Ti_frat)
+        Fj_arr = np.array(fj_frat)
+
+        tix_por_Fx = tij_frat * Fj_arr[None, :]
+        suma_tix_Fx = np.sum(tix_por_Fx, axis=1)
+
+        Tij_nuevo = (tix_por_Fx * Ti_arr[:, None]) / suma_tix_Fx[:, None]
+        df_Tij_nuevo = pd.DataFrame(Tij_nuevo, index=zonas_i, columns=zonas_i)
+
+        st.subheader("Matriz Tij resultante")
+        st.dataframe(df_Tij_nuevo)
+
 #=============FRATAR_CON_DOS_RESTRICCIONES==============================================================================
 st.subheader("Fratar con dos restricción", divider="blue")
 #==============GRAVEDAD================================================================================================================
