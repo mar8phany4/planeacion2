@@ -462,6 +462,10 @@ if uploaded_file is not None:
 
         tix_por_Fx = tij_frat * Fj_arr[None, :]
         suma_tix_Fx = np.sum(tix_por_Fx, axis=1)
+        df_suma_frat1 = pd.DataFrame(suma_tix_Fx, index=zonas_i, columns=["Suma tix_Fx"])
+
+        st.subheader("Suma de tix_Fx por zona")
+        st.dataframe(df_suma_frat1)
 
         Tij_nuevo = (tix_por_Fx * Ti_arr[:, None]) / suma_tix_Fx[:, None]
         df_Tij_nuevo = pd.DataFrame(Tij_nuevo, index=zonas_i, columns=zonas_i)
