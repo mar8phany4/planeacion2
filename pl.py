@@ -472,6 +472,13 @@ if uploaded_file is not None:
 
         st.subheader("Tabla Tij resultante")
         st.dataframe(df_Tij_nuevo)
+        df_Tij_nuevo = pd.DataFrame(Tij_nuevo, index=zonas_i, columns=zonas_i)
+
+        df_display = df_Tij_nuevo.copy()
+        df_display["Total"] = df_display.sum(axis=1)
+
+        st.subheader("Tabla Tij resultante")
+        st.dataframe(df_display)
 
 #=============FRATAR_CON_DOS_RESTRICCIONES==============================================================================
 st.subheader("Fratar con dos restricción", divider="blue")
