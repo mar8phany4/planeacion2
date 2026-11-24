@@ -466,7 +466,7 @@ if uploaded_file is not None:
         Tij_nuevo = (tix_por_Fx * Ti_arr[:, None]) / suma_tix_Fx[:, None]
         df_Tij_nuevo = pd.DataFrame(Tij_nuevo, index=zonas_i, columns=zonas_i)
 
-        st.subheader("Matriz Tij resultante")
+        st.subheader("Tabla Tij resultante")
         st.dataframe(df_Tij_nuevo)
 
 #=============FRATAR_CON_DOS_RESTRICCIONES==============================================================================
