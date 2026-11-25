@@ -475,6 +475,43 @@ if uploaded_file is not None:
 
 #=============FRATAR_CON_DOS_RESTRICCIONES==============================================================================
 st.subheader("Fratar con dos restricción", divider="blue")
+st.markdown("""
+Este método utiliza dos tablas:
+- La tabla OD actual (origen-destino).
+- Una tabla con los viajes futuros producidos por zona y los viajes futuros atraídos por zona.
+
+El propósito es obtener la tabla OD futura que cumpla con la cantidad de viajes futuros producidos y atraídos deseados.
+## Procedimiento iterativo
+Paso 1 — Factores de crecimiento para viajes producidos
+Se calculan los factores de crecimiento  para viajes producidos:
+Fi = (Viajes futuros producidos) / (Viajes actuales producidos)
+Luego, todas las celdas de la fila i se multiplican por Fi.
+
+### Paso 2 — Verificación de viajes atraídos
+
+Se comparan los totales atraídos con los viajes futuros atraídos deseados:
+
+- Si los totales son iguales (o el error está dentro del límite permitido), el proceso termina.
+- Si no, se continúa con el siguiente paso.
+
+### Paso 3 — Factores de crecimiento por atracción
+
+Se calculan los factores de crecimiento para los viajes atraidos:
+
+Fj = (Viajes futuros atraídos) / (Viajes actuales atraídos)
+
+Luego, todas las celdas de la columna *j* se multiplican por Fj.
+
+### Paso 4 — Verificación de viajes producidos
+
+Se comparan los totales producidos con los viajes futuros producidos deseados:
+
+- Si los totales son iguales (o el error está dentro del límite permitido), el proceso termina.
+- Si no, se repite desde el Paso 1.
+
+> Los pasos se repiten de forma intercalada(producción → atracción → producción → ...) hasta que los valores converjan 
+a los deseados o el error sea menor o igual al permitido.
+""")
 #==============GRAVEDAD================================================================================================================
 st.subheader("Gravedad", divider="green")
 st.markdown("**Fórmula:**")
