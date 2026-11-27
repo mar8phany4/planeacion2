@@ -512,6 +512,156 @@ Se comparan los totales producidos con los viajes futuros producidos deseados:
 > Los pasos se repiten de forma intercalada(producción → atracción → producción → ...) hasta que los valores converjan 
 a los deseados o el error sea menor o igual al permitido.
 """)
+
+st.info(
+    "📌 **Nota:** Revisa que tu tabla de viajes futuros atraídos y producidos "
+    "estén balanceados y que el tamaño de ambas tablas concuerde."
+)
+
+# 1. Subida de archivos CSV con sus respectivas keys
+archivo_matriz = st.file_uploader(
+    "Sube la tabla de la matriz base (CSV)", type=["csv"], key="frat2r"
+)
+archivo_factores = st.file_uploader(
+    "Sube la tabla de viajes futuros producidos y atraídos (CSV)",
+    type=["csv"],
+    key="factfrat2r",
+)
+
+if archivo_matriz is not None and archivo_factores is not None:
+    # Leer archivos
+    df_frat_2r = pd.read_csv(archivo_matriz)
+    df_frat_2r.columns = df_frat_2r.columns.str.strip()
+
+    df_vf2r = pd.read_csv(archivo_factores)
+    df_vf2r.columns = df_vf2r.columns.str.strip()
+
+    st.subheader("Vista previa de los datos")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.write("**Matriz base**")
+        st.dataframe(df_frat_2r)
+    with col2:
+        st.write("**Viajes futuros**")
+        st.dataframe(df_vf2r)
+
+    # Parámetros de entrada
+    tolerancia = st.number_input(
+        "Ingresa el margen de error permitido (ej. 0.01 o 0.001):",
+        min_value=1e-9,
+        value=0.01,
+        format="%.6f",
+    )
+    max_iteraciones = 1000
+
+    # Selección de columnas mediante selectbox
+    col_zonas_frat2r = st.selectbox(
+        "Selecciona la columna que contiene las zonas:",
+        options=df_frat_2r.columns,
+    )
+    col_prod_frat2r = st.selectbox(
+        "Selecciona la columna de viajes futuros producidos:",
+        options=df_vf2r.columns,
+    )
+    col_atra_frat2r = st.selectbox(
+        "Selecciona la columna de viajes futuros atraídos:",
+        options=df_vf2r.columns,
+    )
+
+    if st.button("Ejecutar Fratar 2R"):
+        # Calcular sumas iniciales
+        df_calc = df_frat_2r.copy()
+        df_calc["Suma_Fila"] = df_calc.apply(pd.to_numeric, errors="coerce").sum(axis=1)
+        suma_columnas_frat_2r = df_calc.apply(pd.to_numeric, errors="coerce").sum(axis=0)
+        df_calc.loc["Suma_Columna"] = suma_columnas_frat_2r
+
+        # 2. Extraer nombres de zonas y matriz numérica pura
+        df_datos_puros_frat2r = df_calc.drop(index="Suma_Columna", errors="ignore")
+        zonas = df_datos_puros_frat2r[col_zonas_frat2r].tolist()
+
+        columnas_zonas_frat2r = [
+            col
+            for col in df_datos_puros_frat2r.columns
+            if col not in [col_zonas_frat2r, "Suma_Fila"]
+        ]
+        matriz_frat2r = df_datos_puros_frat2r[columnas_zonas_frat2r].to_numpy(dtype=float)
+
+        # Vectores objetivo
+        O_objetivo_f2r = df_vf2r[col_prod_frat2r].to_numpy(dtype=float)
+        D_objetivo_f2r = df_vf2r[col_atra_frat2r].to_numpy(dtype=float)
+
+        # Verificar balance
+        if not np.isclose(O_objetivo_f2r.sum(), D_objetivo_f2r.sum(), atol=1e-3):
+            st.warning(
+                f"⚠️ Advertencia: Los viajes futuros producidos ({O_objetivo_f2r.sum():.2f}) "
+                f"y atraídos ({D_objetivo_f2r.sum():.2f}) no suman lo mismo. "
+                "El algoritmo podría no converger. Balancea la segunda tabla si es necesario."
+            )
+
+        # 3. Proceso iterativo
+        iteracion = 0
+        convergio = False
+        error_fila = 0.0
+        error_col = 0.0
+
+        while iteracion < max_iteraciones:
+            iteracion += 1
+
+            # --- FASE 1: Ajuste por Filas (Viajes Producidos) ---
+            suma_fila = matriz_frat2r.sum(axis=1)
+            factor_fila = np.divide(
+                O_objetivo_f2r,
+                suma_fila,
+                out=np.zeros_like(O_objetivo_f2r),
+                where=suma_fila != 0,
+            )
+            matriz_frat2r = matriz_frat2r * factor_fila[:, np.newaxis]
+
+            suma_columna = matriz_frat2r.sum(axis=0)
+            error_col = np.max(np.abs(D_objetivo_f2r - suma_columna))
+            error_fila = np.max(np.abs(O_objetivo_f2r - matriz_frat2r.sum(axis=1)))
+
+            if error_col <= tolerancia and error_fila <= tolerancia:
+                convergio = True
+                break
+
+            # --- FASE 2: Ajuste por Columnas (Viajes Atraídos) ---
+            factor_col = np.divide(
+                D_objetivo_f2r,
+                suma_columna,
+                out=np.zeros_like(D_objetivo_f2r),
+                where=suma_columna != 0,
+            )
+            matriz_frat2r = matriz_frat2r * factor_col[np.newaxis, :]
+
+            suma_fila_actual = matriz_frat2r.sum(axis=1)
+            suma_col_actual = matriz_frat2r.sum(axis=0)
+            error_fila = np.max(np.abs(O_objetivo_f2r - suma_fila_actual))
+            error_col = np.max(np.abs(D_objetivo_f2r - suma_col_actual))
+
+            if error_fila <= tolerancia and error_col <= tolerancia:
+                convergio = True
+                break
+
+        # 4. Construir la tabla final
+        df_resultado = pd.DataFrame(
+            matriz_frat2r, index=zonas, columns=columnas_zonas_frat2r
+        )
+        df_resultado["Suma_Fila"] = df_resultado.sum(axis=1)
+        df_resultado.loc["Suma_Columna"] = df_resultado.sum(axis=0)
+
+        st.subheader("Resultados")
+        if convergio:
+            st.success(f"Proceso terminado en {iteracion} iteraciones (Convergió: Sí).")
+        else:
+            st.warning(
+                f"Proceso terminado en {iteracion} iteraciones (No convergió dentro del límite)."
+            )
+
+        st.write(
+            f"**Error máximo final** → Filas: `{error_fila:.6f}` | Columnas: `{error_col:.6f}`"
+        )
+        st.dataframe(df_resultado.round(4))
 #==============GRAVEDAD================================================================================================================
 st.subheader("Gravedad", divider="green")
 st.markdown("**Fórmula:**")
